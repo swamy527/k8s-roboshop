@@ -32,12 +32,15 @@ spec:
         tier: app
     spec:
       containers:
-      - name: payment
-        image: joindevops/payment:v1
-        imagePullPolicy: Always
-        envFrom:
-        - secretRef:
-            name: payment
+        - name: payment
+          image: joindevops/payment:v1
+          imagePullPolicy: Always
+          env:
+            - name: CART_PORT
+              value: "8080"
+          envFrom:
+            - secretRef:
+                name: payment
 ---
 apiVersion: v1
 kind: Service
@@ -50,6 +53,6 @@ spec:
     project: roboshop
     tier: app
   ports:
-  - protocol: TCP
-    port: 8080 #service-port
-    targetPort: 8080 #container-port
+    - protocol: TCP
+      port: 8080 #service-port
+      targetPort: 8080 #container-port
