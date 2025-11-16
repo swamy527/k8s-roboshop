@@ -38,6 +38,8 @@ spec:
           env:
             - name: CART_PORT
               value: "8080"
+            - name: USER_PORT
+              value: "8080"
           envFrom:
             - secretRef:
                 name: payment
